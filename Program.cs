@@ -1,5 +1,5 @@
 ﻿using System;
-namespace sort
+namespace bubbleselectionsort
 {
     class Program
     {
@@ -22,15 +22,29 @@ namespace sort
                 }
             }
 }
-        static void selectionsort(ref int[] a, ref int n){
-
+        static void selectionsort(ref int[] a){
+            for (int i = 0; i < a.Length - 1; i++)
+        {
+            int min_idx = i;
+            for (int j = i + 1; j < a.Length; j++)
+                if (a[j] < a[min_idx])
+                    min_idx = j;
+            int temp = a[min_idx];
+            a[min_idx] = a[i];
+            a[i] = temp;
         }
-        static void Main(string[] args)
+        }
+          static void Main(string[] args)
         {
 
-            int[] arr = {2000, 1000, 8000, 4000};
+            int[] arr = new int[8000];
+            Random slump = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = slump.Next();
+            }
             long startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            bubblesort(ref arr);
+            selectionsort(ref arr);
             long stopTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             long elapsedTime = stopTime - startTime;
             for (int i = 0; i < arr.Length; i++)
